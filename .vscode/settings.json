@@ -3,6 +3,11 @@
         "*.html.twig": "twig",
         "*.js": "javascriptreact",
         "*.module": "php",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "random": "cpp",
+        "numeric": "cpp"
     }
 }
