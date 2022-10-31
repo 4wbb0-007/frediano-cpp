@@ -12,13 +12,13 @@
 
 #define TEMPERATURE_SENSOR 26
 
-float distance1 = 0;
-float distance2 = 0;
-float distance3 = 0;
+float distanceLeft = 0;
+float distanceMiddle = 0;
+float distanceRight = 0;
 
-HCSR04 ultrasonicSensor1(27, 13, 20, 300);
-HCSR04 ultrasonicSensor2(27, 12, 20, 300);
-HCSR04 ultrasonicSensor3(27, 14, 20, 300);
+HCSR04 ultrasonicSensorLeft(27, 13, 20, 300);
+HCSR04 ultrasonicSensorMiddle(27, 12, 20, 300);
+HCSR04 ultrasonicSensorRight(27, 14, 20, 300);
 
 void setup() {
     Serial.begin(921600);
@@ -36,9 +36,9 @@ void setup() {
 
     digitalWrite(TEMPERATURE_SENSOR, LOW);
 
-    ultrasonicSensor1.begin();
-    ultrasonicSensor2.begin();
-    ultrasonicSensor3.begin();
+    ultrasonicSensorLeft.begin();
+    ultrasonicSensorMiddle.begin();
+    ultrasonicSensorRight.begin();
 
     WiFi.mode(WIFI_STA);
     WiFiManager wm;
@@ -83,31 +83,31 @@ void loop() {
     Serial.print("Temperature: ");
     Serial.println(celcius);
 
-    ultrasonicSensor1.setTemperature(celcius);
-    ultrasonicSensor2.setTemperature(celcius);
-    ultrasonicSensor3.setTemperature(celcius);
+    ultrasonicSensorLeft.setTemperature(celcius);
+    ultrasonicSensorMiddle.setTemperature(celcius);
+    ultrasonicSensorRight.setTemperature(celcius);
 
-    distance1 = ultrasonicSensor1.getMedianFilterDistance();
-    distance2 = ultrasonicSensor2.getMedianFilterDistance();
-    distance3 = ultrasonicSensor3.getMedianFilterDistance();
+    distanceLeft = ultrasonicSensorLeft.getMedianFilterDistance();
+    distanceMiddle = ultrasonicSensorMiddle.getMedianFilterDistance();
+    distanceRight = ultrasonicSensorRight.getMedianFilterDistance();
 
     Serial.print(F("1: "));
-    Serial.print(distance1, 1);
+    Serial.print(distanceLeft, 1);
 
     Serial.print(F(" 2: "));
-    Serial.print(distance2, 1);
+    Serial.print(distanceMiddle, 1);
 
     Serial.print(F(" 3: "));
-    Serial.print(distance3, 1);
+    Serial.print(distanceRight, 1);
 
     Serial.println("");
 
-    if (distance2 <= minimumDistance || distance3 <= minimumDistance) {
+    if (distanceMiddle <= minimumDistance || distanceRight <= minimumDistance) {
         turnLeft();
         return;
     }
 
-    if (distance1 <= minimumDistance) {
+    if (distanceLeft <= minimumDistance) {
         turnRight();
         return;
     }
