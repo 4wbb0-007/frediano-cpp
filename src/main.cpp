@@ -51,7 +51,7 @@ void setup() {
         Serial.println("Failed to connect");
         ESP.restart();
     } else {
-        Serial.println("connected...yeey :)");
+        Serial.println("connected to WIFI");
     }
 
     delay(2000);
