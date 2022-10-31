@@ -40,21 +40,19 @@ void setup() {
     ultrasonicSensor2.begin();
     ultrasonicSensor3.begin();
 
-    // WiFi.mode(WIFI_STA);
-    // WiFiManager wm;
+    WiFi.mode(WIFI_STA);
+    WiFiManager wm;
 
-    // reset settings - wipe stored credentials for testing
-    // these are stored by the esp library
-    // wm.resetSettings();
+    bool res;
 
-    // res = wm.autoConnect("Frediano");  // password protected ap
+    res = wm.autoConnect("Frediano");  // password protected ap
 
-    // if (!res) {
-    //     Serial.println("Failed to connect");
-    //     // ESP.restart();
-    // } else {
-    //     Serial.println("connected...yeey :)");
-    // }
+    if (!res) {
+        Serial.println("Failed to connect");
+        ESP.restart();
+    } else {
+        Serial.println("connected...yeey :)");
+    }
 
     delay(2000);
 
